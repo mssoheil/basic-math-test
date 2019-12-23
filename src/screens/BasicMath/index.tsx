@@ -8,9 +8,13 @@ const BasicMath: React.FC = () => {
   const dispatch = useDispatch();
   console.log("mool1", basicMathState);
 
-  function clicked() {
-    dispatch(changeFirstOperand({ firstOperand: 10 }));
-  }
+  function clicked() {}
+
+  React.useEffect(() => {
+    dispatch(
+      changeFirstOperand({ firstOperand: Math.floor(Math.random() * 10) })
+    );
+  }, []);
   return (
     <div>
       <span>{basicMathState.firstOperand}</span>

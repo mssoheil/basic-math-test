@@ -10,3 +10,8 @@ export const changeFirstOperand = (value: State): Action => ({
   type: CHANGE_FIRST_OPERAND,
   payload: value
 });
+
+export const changeLastOperand = (value: State): Action => ({
+  type: CHANGE_FIRST_OPERAND,
+  payload: value
+});
