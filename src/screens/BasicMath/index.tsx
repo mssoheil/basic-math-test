@@ -1,27 +1,26 @@
 import * as React from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { changeFirstOperand } from "../../store/basicMath/basicMath.actions";
+import { changeFirstOperand, changeSecondOperand, changeCalculatedNumber, changeOperator } from "../../store/basicMath/basicMath.actions";
 
 const BasicMath: React.FC = () => {
-  const basicMathState = useSelector(({ basicMath }: any) => basicMath);
-  const dispatch = useDispatch();
-  console.log("mool1", basicMathState);
+	const basicMathState = useSelector(({ basicMath }: any) => basicMath);
+	const dispatch = useDispatch();
 
-  function clicked() {}
+	React.useEffect(() => {
+		dispatch(changeOperator({ operator: Math.floor(Math.random() * 4) }));
+		dispatch(changeFirstOperand({ firstOperand: Math.floor(Math.random() * 10) }));
+		dispatch(changeSecondOperand({ secondOperand: Math.floor(Math.random() * 10) }));
+		dispatch(changeCalculatedNumber());
+	}, [dispatch]);
 
-  React.useEffect(() => {
-    dispatch(
-      changeFirstOperand({ firstOperand: Math.floor(Math.random() * 10) })
-    );
-  }, []);
-  return (
-    <div>
-      <span>{basicMathState.firstOperand}</span>
-      <br />
-      <button onClick={clicked}>click</button>
-    </div>
-  );
+	return (
+		<div>
+			<span>{basicMathState.firstOperand}</span> <span>{basicMathState.operatorList[basicMathState.operator]}</span>{" "}
+			<span>{basicMathState.secondOperand}</span> = <span>{basicMathState.calculatedNumber}</span>
+			<br />
+		</div>
+	);
 };
 
 export default BasicMath;
