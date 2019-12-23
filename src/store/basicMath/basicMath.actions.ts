@@ -1,6 +1,12 @@
-import { ADD } from "./basicMath.constants";
+import { CHANGE_FIRST_OPERAND } from "./basicMath.constants";
+import { State } from "./basicMath.reducer";
 
-export const addValue = (value: any) => ({
-  type: ADD,
-  payload: { value }
+export interface Action {
+  type: string;
+  payload?: State;
+}
+
+export const changeFirstOperand = (value: State): Action => ({
+  type: CHANGE_FIRST_OPERAND,
+  payload: value
 });

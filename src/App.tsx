@@ -1,9 +1,8 @@
 import * as React from "react";
 import "./App.css";
-
-const initialState = {
-  basicMath: []
-};
+// screen
+import BasicMath from "./screens/BasicMath";
+import { initialState } from "./store/basicMath/basicMath.reducer";
 
 function reducer(state: any, action: any) {
   return { ...state, ...action };
@@ -24,7 +23,7 @@ const App: React.FC = () => {
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
-        basic math
+        <BasicMath />
       </DispatchContext.Provider>
     </StateContext.Provider>
   );

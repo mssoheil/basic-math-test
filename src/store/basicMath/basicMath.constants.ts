@@ -1,1 +1,1 @@
-export const ADD = "add";
+export const CHANGE_FIRST_OPERAND = "change_first_operand";
