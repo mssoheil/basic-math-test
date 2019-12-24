@@ -14,7 +14,10 @@ import {
 const BasicMath: React.FC = () => {
   const basicMathState = useSelector(({ basicMath }: any) => basicMath);
   const dispatch = useDispatch();
+
   const inputRef = React.useRef<HTMLInputElement>(null);
+
+  const [counter, setCounter] = React.useState(0);
 
   function createTest() {
     dispatch(changeOperator({ operator: Math.floor(Math.random() * 4) }));
@@ -26,9 +29,28 @@ const BasicMath: React.FC = () => {
     );
     dispatch(changeCalculatedNumber());
   }
+
   React.useEffect(() => {
     createTest();
     inputRef.current && inputRef.current.focus();
+
+    let currentCounter = counter;
+    setCounter(currentCounter);
+
+    let interval = setInterval(() => {
+      currentCounter--;
+      setCounter(currentCounter);
+      if (currentCounter < 0) {
+        currentCounter = 10;
+        setCounter(currentCounter);
+        createTest();
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -54,11 +76,14 @@ const BasicMath: React.FC = () => {
         inputRef.current.value = "";
         createTest();
       }
+      setCounter(10);
     }
   }
 
   return (
     <div>
+      <span>{counter}</span>
+      <br />
       <span>{basicMathState.firstOperand}</span>{" "}
       <span>{basicMathState.operatorList[basicMathState.operator]}</span>{" "}
       <span>{basicMathState.secondOperand}</span>
